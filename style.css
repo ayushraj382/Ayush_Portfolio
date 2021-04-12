@@ -1,0 +1,167 @@
+.site-header {
+  font-family: "Dela Gothic One";
+}
+.site-header li a {
+  font-size: 15px;
+}
+.main-page {
+  height: auto;
+  background-color: wheat;
+  text-align: center;
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+.main-page h1 {
+  font-family: "Squada One", cursive;
+  font-size: 100px;
+}
+.main-page h4 {
+  font-family: "Squada One";
+  font-size: 30px;
+  padding-bottom: 20px;
+}
+.my-contact-info {
+  font-size: 20px;
+}
+.main-page p {
+  text-align: center;
+  font-family: "Times New Roman", serif;
+}
+.education {
+  height: auto;
+  background-color: white;
+  padding: 50px 100px;
+}
+.education h2 {
+  font-family: "Dela Gothic One";
+  text-decoration: underline;
+  text-align: center;
+  padding-bottom: 50px;
+}
+.education h5 {
+  font-family: "Roboto";
+  font-weight: bolder;
+  font-size: 28px;
+}
+.stream {
+  font-weight: bold;
+}
+.stream-info {
+  font-style: italic;
+}
+.skills {
+  height: auto;
+  background-color: wheat;
+  padding: 50px 100px;
+}
+.skills h2 {
+  font-family: "Dela Gothic One";
+  text-decoration: underline;
+  text-align: center;
+  padding-bottom: 50px;
+}
+.skills h5 {
+  font-family: "Roboto";
+  font-weight: bolder;
+  font-size: 28px;
+  text-decoration: underline;
+}
+.skills ul li {
+  display: inline;
+  font-size: 50px;
+  padding-right: 15px;
+  padding-bottom: 30px;
+}
+.workflow {
+  height: auto;
+  background-color: white;
+  padding-top: 50px;
+}
+.workflow h2 {
+  font-family: "Dela Gothic One";
+  text-decoration: underline;
+  text-align: center;
+  padding-bottom: 50px;
+}
+.img-left {
+  height: 340px;
+  width: 420px;
+}
+.int {
+  padding: 25px 150px 100px;
+}
+.icon {
+  font-size: 100px;
+}
+/* .img-center {
+  height: 340px;
+  width: 400px;
+}
+.img-right {
+  height: 340px;
+  width: 400px;
+} */
+.interests h4 {
+  font-size: 25px;
+  font-family: Barlow Condensed;
+}
+.contact {
+  height: auto;
+  background-color: wheat;
+  padding-right: 0;
+  padding-left: 0;
+}
+.contact h2 {
+  font-family: "Dela Gothic One";
+  text-decoration: underline;
+  text-align: center;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+.contact_sec-left_h {
+  color: #082740;
+  font-weight: bolder;
+  font-size: 52px;
+  font-family: "Roboto";
+  text-align: center;
+}
+.contact_sec-left_icons {
+  text-align: center;
+  padding-top: 50px;
+}
+.contact_sec-left_icons li {
+  display: inline;
+  padding-right: 20px;
+  font-size: 40px;
+}
+.contact_sec-form_input {
+  width: 363px;
+  margin: 10px;
+  font-size: 18px;
+  padding: 20px;
+  background-color: #eaeef2;
+  border: 1px solid black;
+}
+.contact_sec-form_textarea {
+  width: 86%;
+  height: 150px;
+  margin: 10px;
+  font-size: 18px;
+  padding: 20px;
+  background-color: #eaeef2;
+  border: 1px solid black;
+}
+.contact_sec-form_button {
+  background-color: #ffa801;
+  color: black;
+  margin: 10px;
+  padding: 15px;
+  font-size: 20px;
+}
+.site-footer {
+  height: 50px;
+  background-color: #343a40;
+  color: wheat;
+  text-align: center;
+  font-family: "Roboto";
+}
