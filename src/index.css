@@ -1,0 +1,171 @@
+/* ── Google Fonts — must precede all @tailwind directives ─────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base Layer ───────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-on-surface font-sans;
+    overscroll-behavior: none;
+  }
+
+  /* Hide scrollbar (Stitch design pattern) */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    scrollbar-width: none;
+  }
+
+  /* Focus ring — visible, on-brand */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-container;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary text-on-primary;
+  }
+
+  /* ── Typography resets ─────────────────────────────────────────────── */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-semibold tracking-tight;
+  }
+
+  code, kbd, samp, pre {
+    @apply font-mono;
+  }
+
+  /* Remove default list styles inside nav/interactive areas */
+  nav ul, nav ol {
+    @apply list-none p-0 m-0;
+  }
+}
+
+/* ── Component Layer ──────────────────────────────────────────────────── */
+@layer components {
+
+  /* Section label — monospace eyebrow text used throughout design */
+  .section-label {
+    @apply font-mono text-code-sm text-primary-container uppercase tracking-widest;
+  }
+
+  /* Tech badge / chip — JetBrains Mono, subtle fill */
+  .tech-badge {
+    @apply font-mono text-code-sm text-on-surface-variant
+           bg-surface-container-lowest px-2 py-0.5 rounded
+           border border-surface-container-high;
+  }
+
+  /* Card base — used for expertise, case study tiles, experience items */
+  .card {
+    @apply bg-surface-container-low border border-surface-container-high
+           rounded-lg shadow-card transition-all duration-150;
+  }
+
+  .card-hover {
+    @apply hover:border-primary/40 hover:bg-surface-container hover:shadow-card-hover;
+  }
+
+  /* Pipeline step chip */
+  .pipeline-step {
+    @apply px-2.5 py-1 rounded bg-surface-container-low
+           font-mono text-code-sm text-on-surface
+           border border-surface-container-high
+           whitespace-nowrap;
+  }
+
+  .pipeline-step-accent {
+    @apply px-2.5 py-1 rounded bg-surface-container-low
+           font-mono text-code-sm text-primary-container
+           border border-primary-container/40
+           whitespace-nowrap;
+  }
+
+  .pipeline-step-success {
+    @apply px-2.5 py-1 rounded bg-surface-container-low
+           font-mono text-code-sm text-secondary
+           border border-secondary/40
+           whitespace-nowrap;
+  }
+
+  /* Topology node button */
+  .topology-btn {
+    @apply p-3 rounded border border-surface-container-high text-left
+           bg-surface-container flex flex-col justify-between
+           hover:border-primary-container transition-all duration-150
+           cursor-pointer;
+  }
+
+  .topology-btn-active {
+    @apply border-primary-container/60 bg-surface-container-lowest;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply w-2 h-2 rounded-full bg-secondary shadow-status-glow;
+  }
+
+  /* Contact channel row */
+  .contact-channel {
+    @apply p-space-md rounded bg-surface-container-low border border-surface-container-high
+           hover:border-primary-container transition-all flex items-center justify-between
+           group shadow-card;
+  }
+}
+
+/* ── Utilities Layer ──────────────────────────────────────────────────── */
+@layer utilities {
+  /* Gradient text utility — used in hero headline */
+  .text-gradient-primary {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(
+      to right,
+      theme('colors.on-surface'),
+      theme('colors.primary'),
+      theme('colors.primary-container')
+    );
+  }
+
+  /* Ambient glow blob — hero top decoration */
+  .hero-glow {
+    @apply absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none -z-10;
+    width: 75%;
+    max-width: 56rem;
+    height: 18rem;
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      rgba(0, 240, 255, 0.10) 0%,
+      transparent 70%
+    );
+    filter: blur(48px);
+  }
+
+  /* Subtle inner gradient on cards (Stitch design pattern) */
+  .card-inner-gradient {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.02),
+      transparent
+    );
+  }
+
+  /* Monospace uppercase label — small tracking */
+  .mono-label {
+    @apply font-mono text-label-sm uppercase tracking-widest;
+  }
+
+  /* Accent border segment glow */
+  .accent-border-glow {
+    box-shadow: 0 0 0 1px theme('colors.primary-container');
+  }
+}
