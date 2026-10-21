@@ -15,7 +15,7 @@ import { caseStudies } from '@/data/caseStudies'
 /**
  * CaseStudyPage — full-fidelity template driven by `src/data/caseStudies.ts`.
  * Resolves the case study by matching `slug` from the URL param.
- * Renders all 8 Stitch sections in faithful order with dark editorial styling.
+ * Renders all 8 Stitch sections with standardized vertical rhythm and divider borders.
  */
 export default function CaseStudyPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -36,7 +36,7 @@ export default function CaseStudyPage() {
         className="w-full bg-background min-h-screen text-on-surface pt-space-md pb-space-3xl"
         aria-labelledby="case-study-title"
       >
-        <div className="w-full max-w-[1240px] mx-auto px-gutter">
+        <div className="w-full max-w-[1240px] mx-auto px-gutter space-y-16 md:space-y-24">
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -53,6 +53,7 @@ export default function CaseStudyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.35 }}
+              className="border-t border-surface-container-high/60 pt-16 md:pt-24"
             >
               <ContextSection context={cs.context} />
             </motion.div>
@@ -65,6 +66,7 @@ export default function CaseStudyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.35 }}
+              className="border-t border-surface-container-high/60 pt-16 md:pt-24"
             >
               <ArchitecturePipeline pipeline={cs.pipelineStages} />
             </motion.div>
@@ -77,6 +79,7 @@ export default function CaseStudyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.35 }}
+              className="border-t border-surface-container-high/60 pt-16 md:pt-24"
             >
               <CompatibilityMatrix matrix={cs.compatibilityMatrix} />
             </motion.div>
@@ -89,6 +92,7 @@ export default function CaseStudyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.35 }}
+              className="border-t border-surface-container-high/60 pt-16 md:pt-24"
             >
               <SystemChallenges challenges={cs.challenges} />
             </motion.div>
@@ -101,6 +105,7 @@ export default function CaseStudyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.35 }}
+              className="border-t border-surface-container-high/60 pt-16 md:pt-24"
             >
               <ContributionsSection contributions={cs.contributions} />
             </motion.div>
@@ -113,6 +118,7 @@ export default function CaseStudyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.35 }}
+              className="border-t border-surface-container-high/60 pt-16 md:pt-24"
             >
               <ValidationGates validation={cs.validation} />
             </motion.div>
@@ -125,34 +131,37 @@ export default function CaseStudyPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.35 }}
+              className="border-t border-surface-container-high/60 pt-16 md:pt-24"
             >
               <TakeawaySection takeaway={cs.takeaway} />
             </motion.div>
           )}
 
           {/* Case Study Bottom Navigation */}
-          <nav
-            aria-label="Case study pagination"
-            className="bg-surface-container border border-surface-container-high p-space-lg rounded-xl flex flex-col sm:flex-row items-center justify-between gap-space-md font-mono text-code-sm shadow-card"
-          >
-            <Link
-              to="/#work"
-              className="text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-space-xs group"
+          <div className="border-t border-surface-container-high/60 pt-12 md:pt-16 pb-12">
+            <nav
+              aria-label="Case study pagination"
+              className="bg-surface-container border border-surface-container-high p-space-lg rounded-xl flex flex-col sm:flex-row items-center justify-between gap-space-md font-mono text-code-sm shadow-card"
             >
-              <ArrowLeft className="w-4 h-4 text-primary-container transition-transform group-hover:-translate-x-1" />
-              <span>Return to All Case Studies</span>
-            </Link>
-
-            {nextStudy && (
               <Link
-                to={`/case/${nextStudy.slug}`}
-                className="text-primary hover:text-primary-container transition-colors flex items-center gap-space-xs group"
+                to="/#work"
+                className="text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-space-xs group"
               >
-                <span>Explore Next: {nextStudy.title}</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ArrowLeft className="w-4 h-4 text-primary-container transition-transform group-hover:-translate-x-1" />
+                <span>Return to All Case Studies</span>
               </Link>
-            )}
-          </nav>
+
+              {nextStudy && (
+                <Link
+                  to={`/case/${nextStudy.slug}`}
+                  className="text-primary hover:text-primary-container transition-colors flex items-center gap-space-xs group"
+                >
+                  <span>Explore Next: {nextStudy.title}</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              )}
+            </nav>
+          </div>
         </div>
       </article>
     </Layout>

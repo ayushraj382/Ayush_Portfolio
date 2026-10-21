@@ -13,9 +13,9 @@ interface ValidationGatesProps {
 
 export default function ValidationGates({ validation }: ValidationGatesProps) {
   return (
-    <section className="mb-space-3xl">
-      <div className="flex flex-col gap-space-xs mb-space-xl">
-        <div className="flex items-center gap-space-sm">
+    <section className="w-full">
+      <div className="flex flex-col gap-space-xs mb-8 md:mb-12">
+        <div className="flex items-center gap-space-sm mb-1">
           <SectionLabel label="[ VERIFICATION ]" />
           <span className="font-mono text-label-md text-outline uppercase tracking-wider">
             {validation.subtitle}

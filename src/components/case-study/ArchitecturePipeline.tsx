@@ -43,9 +43,9 @@ export default function ArchitecturePipeline({ pipeline }: ArchitecturePipelineP
   }
 
   return (
-    <section className="mb-space-3xl">
-      <div className="flex flex-col gap-space-xs mb-space-xl">
-        <div className="flex items-center gap-space-sm">
+    <section className="w-full">
+      <div className="flex flex-col gap-space-xs mb-8 md:mb-12">
+        <div className="flex items-center gap-space-sm mb-1">
           <SectionLabel label="[ ARCHITECTURE PIPELINE ]" />
           <span className="font-mono text-label-md text-outline uppercase tracking-wider">
             {pipeline.subtitle}

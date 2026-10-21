@@ -86,6 +86,8 @@ const config: Config = {
         'space-md': '1rem',     // 16px
         'space-lg': '1.5rem',   // 24px
         'space-xl': '2.5rem',   // 40px
+        'space-2xl': '4rem',    // 64px
+        'space-3xl': '6rem',    // 96px
         'gutter':   '1.5rem',   // 24px — column/horizontal padding
         'gutter-sm':'1rem',     // 16px — mobile gutter
         'margin':   '2rem',     // 32px
