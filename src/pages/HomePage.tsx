@@ -24,10 +24,10 @@ export default function HomePage() {
       <TechStack />
       {/* §4  Work / Case Study Previews ──── */}
       <Work />
-      {/* §5  Engineering / How I Think ───── */}
-      <Engineering />
-      {/* §6  Architecture / Topology ─────── */}
+      {/* §5  Architecture / Topology ─────── */}
       <Architecture />
+      {/* §6  Engineering / How I Think ───── */}
+      <Engineering />
       {/* §7  Experience ──────────────────── */}
       <Experience />
       {/* §8+9 About + Philosophy Banner ──── */}

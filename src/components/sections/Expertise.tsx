@@ -26,7 +26,7 @@ export default function Expertise() {
   return (
     <section
       id="expertise"
-      className="w-full bg-surface-container-lowest py-space-xl"
+      className="w-full bg-surface-container-lowest py-space-xl scroll-mt-24 md:scroll-mt-28"
       aria-labelledby="expertise-heading"
     >
       <div className="max-w-7xl mx-auto px-gutter flex flex-col gap-space-xl">

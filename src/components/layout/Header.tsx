@@ -10,7 +10,7 @@ import { navLinks } from '@/data/navigation'
  * "Let's Talk" CTA always visible on the right.
  */
 export default function Header() {
-  const [activeAnchor, setActiveAnchor] = useState<string>('work')
+  const [activeAnchor, setActiveAnchor] = useState<string>('expertise')
   const [mobileOpen, setMobileOpen] = useState(false)
   const { pathname } = useLocation()
 

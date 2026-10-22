@@ -19,7 +19,7 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="w-full py-space-xl bg-surface"
+      className="w-full py-space-xl bg-surface scroll-mt-24 md:scroll-mt-28"
       aria-labelledby="experience-heading"
     >
       <div className="max-w-7xl mx-auto px-gutter flex flex-col gap-space-xl">
