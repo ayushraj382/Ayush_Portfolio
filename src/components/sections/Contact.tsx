@@ -1,8 +1,10 @@
 import { useState, useId } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Copy, Check } from 'lucide-react'
+import { ArrowRight, Copy, Check, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
 import SectionLabel from '@/components/ui/SectionLabel'
 import { contactChannels, contactTopics, email } from '@/data/contact'
+
+const WEB3FORMS_ACCESS_KEY = '09abca9d-40a7-48dc-87cd-144ca67f2e5c'
 
 /** Icon map for contact channels */
 function ChannelIcon({ id }: { id: string }) {
@@ -26,13 +28,22 @@ function ChannelIcon({ id }: { id: string }) {
   )
 }
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error'
+
 /**
- * Contact section — direct channel links, email copy button, and static inquiry form.
- * Form submission shows a mailto fallback alert (no backend).
+ * Contact section — direct channel links, email copy button, and interactive Web3Forms inquiry form.
  */
 export default function Contact() {
   const [copied, setCopied] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<FormStatus>('idle')
+  const [errorMessage, setErrorMessage] = useState<string>('')
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    topic: '',
+    message: '',
+  })
 
   const nameId    = useId()
   const emailId   = useId()
@@ -46,12 +57,55 @@ export default function Contact() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const form = e.currentTarget
-    form.reset()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 6000)
+    setStatus('loading')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.topic || 'General Inquiry',
+          message: formData.message,
+          from_name: 'Portfolio Contact Form',
+        }),
+      })
+
+      const result = await response.json()
+
+      if (response.ok && result.success) {
+        setStatus('success')
+        setFormData({ name: '', email: '', topic: '', message: '' })
+      } else {
+        setStatus('error')
+        setErrorMessage(
+          result.message || 'Something went wrong while submitting the form. Please try again or email directly.'
+        )
+      }
+    } catch {
+      setStatus('error')
+      setErrorMessage('Network connection error. Please email directly at ' + email)
+    }
+  }
+
+  const handleReset = () => {
+    setStatus('idle')
+    setErrorMessage('')
   }
 
   return (
@@ -123,7 +177,7 @@ export default function Contact() {
                       type="button"
                       onClick={handleCopy}
                       aria-label="Copy email address"
-                      className="ml-space-md shrink-0 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary-container font-mono text-code-sm transition-colors duration-150 border border-surface-container-highest flex items-center gap-1"
+                      className="ml-space-md shrink-0 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary-container font-mono text-code-sm transition-colors duration-150 border border-surface-container-highest flex items-center gap-1 cursor-pointer"
                     >
                       {copied
                         ? <><Check size={13} aria-hidden="true" /><span>Copied!</span></>
@@ -143,120 +197,177 @@ export default function Contact() {
           </div>
 
           {/* ── Inquiry Form ──────────────────────────────────────────── */}
-          <div className="lg:col-span-7 p-space-lg rounded-xl bg-surface-container-low border border-surface-container-high shadow-card">
-            <form
-              id="contact-form"
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-space-md"
-              noValidate
-            >
-              {/* Name + Email row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor={nameId}
-                    className="font-mono text-code-sm text-outline uppercase tracking-wider"
-                  >
-                    YOUR NAME
-                  </label>
-                  <input
-                    id={nameId}
-                    type="text"
-                    placeholder="Your name"
-                    required
-                    className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm placeholder:text-outline focus:outline-none focus:border-primary-container transition-colors duration-150"
-                  />
+          <div className="lg:col-span-7 p-space-lg rounded-xl bg-surface-container-low border border-surface-container-high shadow-card flex flex-col justify-between">
+            {status === 'success' ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="py-space-xl flex flex-col items-center justify-center text-center gap-space-md my-auto"
+              >
+                <div className="w-12 h-12 rounded-full bg-secondary/10 border border-secondary/30 flex items-center justify-center text-secondary">
+                  <CheckCircle2 size={28} />
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <label
-                    htmlFor={emailId}
-                    className="font-mono text-code-sm text-outline uppercase tracking-wider"
-                  >
-                    EMAIL ADDRESS
-                  </label>
-                  <input
-                    id={emailId}
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                    className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm placeholder:text-outline focus:outline-none focus:border-primary-container transition-colors duration-150"
-                  />
+                <div className="space-y-1">
+                  <h3 className="font-sans text-headline-sm font-semibold text-on-surface">
+                    Message sent successfully!
+                  </h3>
+                  <p className="font-sans text-body-md text-on-surface-variant max-w-md">
+                    Thank you for reaching out. I have received your message and will get back to you as soon as I can.
+                  </p>
                 </div>
-              </div>
-
-              {/* Topic select */}
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor={topicId}
-                  className="font-mono text-code-sm text-outline uppercase tracking-wider"
-                >
-                  WHAT ARE YOU REACHING OUT ABOUT?
-                </label>
-                <select
-                  id={topicId}
-                  required
-                  defaultValue=""
-                  className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm focus:outline-none focus:border-primary-container transition-colors duration-150"
-                >
-                  <option value="" disabled>Select an option</option>
-                  {contactTopics.map((t) => (
-                    <option key={t.value} value={t.value}>{t.label}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Message textarea */}
-              <div className="flex flex-col gap-1.5">
-                <label
-                  htmlFor={messageId}
-                  className="font-mono text-code-sm text-outline uppercase tracking-wider"
-                >
-                  TELL ME WHAT YOU'RE WORKING ON
-                </label>
-                <textarea
-                  id={messageId}
-                  rows={4}
-                  required
-                  placeholder="Tell me a little about the role, project, problem or opportunity..."
-                  className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm placeholder:text-outline focus:outline-none focus:border-primary-container transition-colors duration-150 resize-none"
-                />
-              </div>
-
-              {/* Submit row */}
-              <div className="flex items-center justify-between pt-space-xs">
-                <span className="font-mono text-code-sm text-outline flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary" aria-hidden="true" />
-                  I'll get back to you as soon as I can.
-                </span>
                 <button
-                  type="submit"
-                  className="px-5 py-2.5 rounded bg-primary-container text-on-primary-container font-mono text-code-md font-medium hover:bg-primary hover:text-on-primary transition-all duration-150 flex items-center gap-1.5 shadow-card"
+                  type="button"
+                  onClick={handleReset}
+                  className="mt-space-sm px-4 py-2 rounded bg-surface-container hover:bg-surface-container-high text-primary-container font-mono text-code-sm border border-surface-container-high transition-colors cursor-pointer"
                 >
-                  Send Message
-                  <ArrowRight size={14} aria-hidden="true" />
+                  Send another message
                 </button>
-              </div>
+              </motion.div>
+            ) : (
+              <form
+                id="contact-form"
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-space-md"
+              >
+                {/* Name + Email row */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor={nameId}
+                      className="font-mono text-code-sm text-outline uppercase tracking-wider"
+                    >
+                      YOUR NAME
+                    </label>
+                    <input
+                      id={nameId}
+                      name="name"
+                      type="text"
+                      placeholder="Your name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      disabled={status === 'loading'}
+                      className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm placeholder:text-outline focus:outline-none focus:border-primary-container transition-colors duration-150 disabled:opacity-50"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label
+                      htmlFor={emailId}
+                      className="font-mono text-code-sm text-outline uppercase tracking-wider"
+                    >
+                      EMAIL ADDRESS
+                    </label>
+                    <input
+                      id={emailId}
+                      name="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      disabled={status === 'loading'}
+                      className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm placeholder:text-outline focus:outline-none focus:border-primary-container transition-colors duration-150 disabled:opacity-50"
+                    />
+                  </div>
+                </div>
 
-              {/* Mailto fallback alert */}
-              {submitted && (
-                <motion.div
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-3 rounded-lg bg-surface-container border border-surface-container-high text-on-surface-variant font-mono text-code-sm text-center"
-                  role="alert"
-                  aria-live="polite"
-                >
-                  Direct email integration pending. Please feel free to email directly at{' '}
-                  <a
-                    href={`mailto:${email}`}
-                    className="text-primary underline hover:text-primary-container transition-colors"
+                {/* Topic select */}
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor={topicId}
+                    className="font-mono text-code-sm text-outline uppercase tracking-wider"
                   >
-                    {email}
-                  </a>
-                  .
-                </motion.div>
-              )}
-            </form>
+                    WHAT ARE YOU REACHING OUT ABOUT?
+                  </label>
+                  <select
+                    id={topicId}
+                    name="topic"
+                    required
+                    value={formData.topic}
+                    onChange={handleChange}
+                    disabled={status === 'loading'}
+                    className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm focus:outline-none focus:border-primary-container transition-colors duration-150 disabled:opacity-50"
+                  >
+                    <option value="" disabled>Select an option</option>
+                    {contactTopics.map((t) => (
+                      <option key={t.value} value={t.label}>{t.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Message textarea */}
+                <div className="flex flex-col gap-1.5">
+                  <label
+                    htmlFor={messageId}
+                    className="font-mono text-code-sm text-outline uppercase tracking-wider"
+                  >
+                    TELL ME WHAT YOU'RE WORKING ON
+                  </label>
+                  <textarea
+                    id={messageId}
+                    name="message"
+                    rows={4}
+                    required
+                    value={formData.message}
+                    onChange={handleChange}
+                    disabled={status === 'loading'}
+                    placeholder="Tell me a little about the role, project, problem or opportunity..."
+                    className="w-full px-3 py-2 rounded bg-surface-container-lowest border border-surface-container-high text-on-surface font-sans text-body-sm placeholder:text-outline focus:outline-none focus:border-primary-container transition-colors duration-150 resize-none disabled:opacity-50"
+                  />
+                </div>
+
+                {/* Error Notice */}
+                {status === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 rounded-lg bg-surface-container border border-red-500/40 text-on-surface-variant font-mono text-code-sm flex items-start gap-2"
+                    role="alert"
+                  >
+                    <AlertCircle size={16} className="text-red-400 shrink-0 mt-0.5" />
+                    <div className="space-y-1">
+                      <p className="text-red-300 font-medium">Failed to send message via Web3Forms.</p>
+                      <p className="text-on-surface-variant text-xs">
+                        {errorMessage || 'An unexpected error occurred.'}{' '}
+                        Please feel free to email directly at{' '}
+                        <a
+                          href={`mailto:${email}?subject=Portfolio Inquiry`}
+                          className="text-primary underline hover:text-primary-container transition-colors"
+                        >
+                          {email}
+                        </a>
+                        .
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Submit row */}
+                <div className="flex items-center justify-between pt-space-xs">
+                  <span className="font-mono text-code-sm text-outline flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary" aria-hidden="true" />
+                    I'll get back to you as soon as I can.
+                  </span>
+                  <button
+                    type="submit"
+                    disabled={status === 'loading'}
+                    className="px-5 py-2.5 rounded bg-primary-container text-on-primary-container font-mono text-code-md font-medium hover:bg-primary hover:text-on-primary transition-all duration-150 flex items-center gap-1.5 shadow-card cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {status === 'loading' ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" aria-hidden="true" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <ArrowRight size={14} aria-hidden="true" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </motion.div>
       </div>

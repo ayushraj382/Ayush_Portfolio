@@ -134,16 +134,6 @@ export default function Header() {
               {label}
             </a>
           ))}
-          <div className="pt-space-sm border-t border-surface-container-high mt-space-xs">
-            <a
-              href="/#contact"
-              onClick={closeMobile}
-              className="inline-flex items-center gap-space-xs px-4 py-2 rounded bg-primary text-on-primary font-mono text-label-md hover:bg-primary-container hover:text-on-primary-container transition-all duration-150"
-            >
-              Let's Talk
-              <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
-          </div>
         </nav>
       )}
     </header>

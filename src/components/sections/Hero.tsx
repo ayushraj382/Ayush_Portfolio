@@ -107,7 +107,7 @@ export default function Hero() {
           <span className="font-mono text-code-sm text-primary tracking-wider uppercase">
             [ ENGINEERING DOMAINS ]
           </span>
-          <span className="font-mono text-code-sm text-on-surface-variant">WHAT I WORK ACROSS</span>
+          {/* <span className="font-mono text-code-sm text-on-surface-variant">WHAT I WORK ACROSS</span> */}
         </div>
 
         {/* 5-column domain grid */}
