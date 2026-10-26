@@ -98,18 +98,6 @@
            whitespace-nowrap;
   }
 
-  /* Topology node button */
-  .topology-btn {
-    @apply p-3 rounded border border-surface-container-high text-left
-           bg-surface-container flex flex-col justify-between
-           hover:border-primary-container transition-all duration-150
-           cursor-pointer;
-  }
-
-  .topology-btn-active {
-    @apply border-primary-container/60 bg-surface-container-lowest;
-  }
-
   /* Status dot */
   .status-dot {
     @apply w-2 h-2 rounded-full bg-secondary shadow-status-glow;
