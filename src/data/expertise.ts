@@ -17,10 +17,10 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'terminal',
     lucideIcon: 'Terminal',
     title: 'Backend Engineering',
-    subtitle: 'Java · Spring Boot · REST APIs · Maven',
+    subtitle: 'API design, runtime reliability, and service integration',
     description:
-      'Backend services, API integrations, dependency upgrades, application troubleshooting and production debugging.',
-    tags: ['Java', 'Spring Boot', 'REST APIs'],
+      'Engineering resilient service architectures, handling dependency migrations, resolving concurrency bottlenecks, and conducting production incident debugging.',
+    tags: ['Java', 'Spring Boot', 'REST APIs', 'Maven', 'Microservices'],
   },
   {
     id: 'frontend',
@@ -28,10 +28,10 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'web',
     lucideIcon: 'Monitor',
     title: 'Frontend Engineering',
-    subtitle: 'HTML · CSS · JavaScript · Browser Debugging',
+    subtitle: 'Responsive web systems, state architecture, and UI performance',
     description:
-      'Building and troubleshooting web interfaces, responsive layouts, CMS templates, client-side behavior and browser-based integrations.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Chrome DevTools'],
+      'Building type-safe interfaces, design systems, and responsive layouts with high rendering performance, clean component abstractions, and deep DevTools profiling.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'HTML5/CSS3', 'Vite'],
   },
   {
     id: 'cms',
@@ -39,10 +39,10 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'feed',
     lucideIcon: 'Rss',
     title: 'CMS & Publishing',
-    subtitle: 'Custom CMS · WordPress · RSS · Templates',
+    subtitle: 'Editorial pipelines, headless content engines, and syndication',
     description:
-      'Custom CMS platforms, WordPress, content migration, publishing workflows, RSS feeds, templates, multilingual content and content delivery.',
-    tags: ['Custom CMS', 'WordPress', 'RSS', 'Publishing'],
+      'Architecting zero-downtime content migrations, decoupled templates, automated editorial workflows, and multilingual syndication feeds at enterprise scale.',
+    tags: ['Custom CMS', 'WordPress', 'RSS/Atom', 'Headless Arch', 'Sanitization'],
   },
   {
     id: 'adtech',
@@ -50,10 +50,10 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'ads_click',
     lucideIcon: 'MousePointerClick',
     title: 'Ad Technology',
-    subtitle: 'Ad Tags · Ad Slots · Publisher Integrations',
+    subtitle: 'Client-side auction flows, yield diagnostics, and tag latency',
     description:
-      'Ad configuration, ad rendering, publisher integrations, campaign troubleshooting and browser-side debugging.',
-    tags: ['Ad Tags', 'Ad Slots', 'Publisher Integrations'],
+      'Diagnosing header bidding latency, orchestrating inventory configuration, resolving bidder drop-offs, and protecting layout stability against cumulative shifts.',
+    tags: ['Prebid.js', 'Google Ad Manager (GAM)', 'Bid Analysis', 'Core Web Vitals'],
   },
   {
     id: 'data',
@@ -61,21 +61,21 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'database',
     lucideIcon: 'Database',
     title: 'Data & Search',
-    subtitle: 'MySQL · MariaDB · Solr · Redis · Kafka',
+    subtitle: 'Schema optimization, indexing pipelines, and high-throughput query caching',
     description:
-      'Database queries, search indexing, schema analysis, caching and application data flows.',
-    tags: ['MySQL', 'Solr', 'Redis'],
+      'Designing high-volume search collections, streaming ingestion workers, cache invalidation schemes, and optimizing complex relational queries.',
+    tags: ['MySQL', 'Apache Solr', 'Redis', 'Apache Kafka', 'MariaDB'],
   },
   {
     id: 'infrastructure',
     index: '06',
     icon: 'dns',
     lucideIcon: 'Server',
-    title: 'Infrastructure',
-    subtitle: 'Linux · Apache · Tomcat · Jenkins · Git',
+    title: 'Infrastructure & Tooling',
+    subtitle: 'Deployment pipelines, runtime containerization, and log telemetry',
     description:
-      'Server environments, deployments, application runtime troubleshooting, logs and production support.',
-    tags: ['Linux', 'Tomcat', 'Jenkins'],
+      'Automating CI/CD delivery pipelines, managing containerized servlet environments, aggregating distributed log streams, and maintaining production uptime.',
+    tags: ['Linux', 'Docker', 'Apache Tomcat', 'Jenkins', 'Git CI/CD'],
   },
   {
     id: 'seo',
@@ -83,10 +83,10 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'trending_up',
     lucideIcon: 'TrendingUp',
     title: 'SEO & Web Optimization',
-    subtitle: 'Technical SEO · Sitemaps · Metadata · Performance',
+    subtitle: 'Crawl budget efficiency, structured indexing, and edge caching',
     description:
-      'Technical SEO, sitemap infrastructure, content discoverability, URL handling, metadata and publishing optimization.',
-    tags: ['Technical SEO', 'Sitemaps', 'Metadata', 'Content Optimization'],
+      'Engineering dynamic XML sitemap generation, structured JSON-LD schemas, canonical routing rules, and Core Web Vitals optimization for large publisher domains.',
+    tags: ['JSON-LD Schema', 'XML Sitemaps', 'Lighthouse', 'Core Web Vitals', 'Canonical Routing'],
   },
   {
     id: 'analytics',
@@ -94,10 +94,10 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'hub',
     lucideIcon: 'BarChart3',
     title: 'Analytics & Integrations',
-    subtitle: 'GA4 · GTM · Meta APIs · External APIs',
+    subtitle: 'Event telemetry, behavioral pipelines, and webhook orchestration',
     description:
-      'Analytics implementation, event tracking, API integrations and troubleshooting data flows between platforms.',
-    tags: ['GA4', 'GTM', 'APIs'],
+      'Instrumenting end-to-end event data streams, server-side attribution, and cross-platform payload synchronization across third-party endpoints.',
+    tags: ['Google Analytics 4', 'Google Tag Manager', 'DataLayer', 'Webhooks', 'Meta Pixel'],
   },
   {
     id: 'solutions',
@@ -105,9 +105,9 @@ export const expertiseCards: ExpertiseCard[] = [
     icon: 'build',
     lucideIcon: 'Wrench',
     title: 'Technical Solutions',
-    subtitle: 'Integration · Troubleshooting · Client Support',
+    subtitle: 'Root-cause diagnostics, cross-stack triaging, and system audits',
     description:
-      'Investigating implementation issues across frontend, APIs, CMS, advertising, analytics and backend systems.',
-    tags: ['Debugging', 'Integrations', 'Jira'],
+      'Bridging product and infrastructure by troubleshooting edge cases across browser runtimes, reverse proxies, content APIs, and publisher partner integrations.',
+    tags: ['Root Cause Analysis', 'Network Tracing', 'Production Triaging', 'SLA Management'],
   },
 ]
