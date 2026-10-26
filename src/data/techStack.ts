@@ -11,7 +11,7 @@ export const techStackCategories: TechCategory[] = [
     id: 'languages',
     index: '01',
     label: 'LANGUAGES & WEB',
-    items: ['Java', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'SQL', 'Bash / Shell'],
+    items: ['TypeScript', 'JavaScript (ES6+)', 'Java', 'SQL', 'HTML5', 'CSS3', 'Bash / Shell'],
   },
   {
     id: 'backend',
@@ -22,8 +22,8 @@ export const techStackCategories: TechCategory[] = [
   {
     id: 'frontend',
     index: '03',
-    label: 'FRONTEND & WEB',
-    items: ['HTML', 'CSS', 'JavaScript', 'Chrome DevTools', 'Responsive UI', 'Browser Debugging'],
+    label: 'FRONTEND ARCHITECTURE & UI',
+    items: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Chrome DevTools', 'Responsive UI', 'State Management'],
   },
   {
     id: 'cms',
